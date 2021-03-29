@@ -1,4 +1,5 @@
 # todo-app
+- Mini app for framework testing and learning purposes.
 
 ## Project setup
 ```

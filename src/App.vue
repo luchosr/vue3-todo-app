@@ -6,9 +6,11 @@
   <button>Add New Todo</button>
 </form>
 <div class="">
+  <button @click="markAllDone()">Mark All Done</button>
   <ul>
-    <li v-for="todo in todos" :key="todo.id">
-      <h3>{{todo.content}}</h3>
+    <li v-for="(todo, index) in todos" :key="todo.id" class="todo">
+      <h3 :class="{done: todo.done}" @click="toggleDone(todo)">{{todo.content}}</h3>
+      <button @click="removeTodo(index)">Remove todo</button>
     </li>
   </ul>
 </div>
@@ -31,10 +33,24 @@ setup(){
     });
     newTodo.value = ''; //vacía el input luego del submit
   }
+
+  function toggleDone(todo){
+    todo.done = !todo.done;
+  }
+
+  function removeTodo(index){
+    todos.value.splice(index,1);
+  }
+  function markAllDone(){
+    todos.value.forEach(todo=> todo.done = true);
+}
   return{
     todos,
     newTodo,
-    addNewTodo
+    addNewTodo,
+    toggleDone,
+    removeTodo,
+    markAllDone
   }
 }
 }
@@ -48,5 +64,11 @@ setup(){
   text-align: center;
   color: #2c3e50;
   margin: 0 auto;
+}
+.todo{
+  cursor: pointer;
+}
+.done {
+text-decoration: line-through;
 }
 </style>

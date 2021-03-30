@@ -7,7 +7,9 @@
 </form>
 <div class="">
   <ul>
-    <li v-for="todo in todos" :key="todo.id">{{todo.content}}</li>
+    <li v-for="todo in todos" :key="todo.id">
+      <h3>{{todo.content}}</h3>
+    </li>
   </ul>
 </div>
 </template>
@@ -26,7 +28,8 @@ setup(){
       id: Date.now(),
       done:false,
       content: newTodo.value,
-    })
+    });
+    newTodo.value = ''; //vacía el input luego del submit
   }
   return{
     todos,
